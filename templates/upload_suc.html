@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV Upload</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var form = $('#upload-form');
+            var progress = $('#upload-progress');
+
+            form.on('submit', function(event) {
+                event.preventDefault();
+
+                var formData = new FormData(this);
+
+                $.ajax({
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener('progress', function(e) {
+                            if (e.lengthComputable) {
+                                var percent = Math.round((e.loaded / e.total) * 100);
+                                progress.attr('aria-valuenow', percent);
+                                progress.css('width', percent + '%');
+                                progress.text(percent + '%');
+                            }
+                        });
+                        return xhr;
+                    },
+                    type: 'POST',
+                    url: form.attr('action'),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        alert('CSV file uploaded successfully!');
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error occurred while uploading the CSV file: ' + error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>CSV Upload</h1>
+    <form id="upload-form" action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="csv_file" required>
+        <button type="submit">Upload</button>
+    </form>
+    <div class="progress">
+        <div id="upload-progress" class="progress-bar" role="progressbar" 
+             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+            0%
+        </div>
+    </div>
+</body>
+</html>

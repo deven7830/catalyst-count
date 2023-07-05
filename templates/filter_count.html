@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title> Filter Records</title>
+{% endblock %}
+
+{% block content %}
+<div class="container jumbotron">  
+    <form method="get">
+
+    <label for="industry_name"> Industry Name</label>
+    <input type="text" id="industry_name" name="industry_name"  autocomplete="off">
+    &nbsp; &nbsp; &nbsp;
+    <label for="domain"> Domain</label>
+    <input type="text" id="domain" name="domain"  autocomplete="off">
+    &nbsp; &nbsp; &nbsp;
+    <label for="year_founded"> Year founded</label>
+    <input type="text" id="year_founded" name="year_founded"  autocomplete="off">
+   
+     <br>
+
+    <label for="size_range"> Size Range</label>
+    <input type="text" id="size_range" name="size_range"  autocomplete="off">
+    &nbsp; &nbsp; &nbsp;
+    <label for="locality"> Locality</label>
+    <input type="text" id="locality" name="locality"  autocomplete="off">
+    &nbsp; &nbsp; &nbsp;
+    <label for="country"> Country</label>
+    <input type="text" id="country" name="country"  autocomplete="off">
+
+    <br>
+    
+    <label for="linkedIn_url"> linkedIn Url</label>
+    <input type="text" id="linkedIn_url" name="linkedIn_url"  autocomplete="off">
+    &nbsp; &nbsp; &nbsp;
+    <label for="current_estimate_emp"> current_estimate_emp</label>
+    <input type="text" id="current_estimate_emp" name="current_estimate_emp"  autocomplete="off">
+    &nbsp; &nbsp; &nbsp;
+    <label for="total_estimate_emp"> total_estimate_emp</label>
+    <input type="text" id="total_estimate_emp" name="total_estimate_emp"  autocomplete="off">
+ 
+    <br> <br>
+
+    <center>
+          <input type="submit" class="btn btn-outline btn-success " value="Query Data">
+    </center>
+    <br>
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

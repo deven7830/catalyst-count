@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Upload CSV File</title>
+
+{% endblock %}
+
+{% block content %}
+<div class="container jumbotron">
+    
+    <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="padding-left:400px">Upload CSV File</h3>
+        <br/>
+        <input type="file" name="csv_file" accept=".csv" style="padding-left:400px" required>
+        <br/>  <br/> 
+       <div style="padding-left:450px"> <input type="submit" class="btn btn-outline btn-success"  value="Upload"></div>
+        
+    </form>
+   
+</div>
+
+{% endblock %}
